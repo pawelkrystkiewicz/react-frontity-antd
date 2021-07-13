@@ -1,0 +1,32 @@
+{
+  "name": "react-frontity-antd",
+  "version": "0.1.0",
+  "description": "React on frontity with AntD",
+  "main": "index.js",
+  "repository": "https://github.com/pawelkrystkiewicz/react-frontity-antd.git",
+  "author": "pawelkrystkiewicz <pawelkrystkiewicz@outlook.com>",
+  "license": "MIT",
+  "keywords": [
+    "frontity",
+    "antd"
+  ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "frontity dev",
+    "build": "frontity build",
+    "serve": "frontity serve"
+  },
+  "dependencies": {
+    "@frontity/core": "^1.9.0",
+    "@frontity/html2react": "^1.4.0",
+    "@frontity/tiny-router": "^1.2.2",
+    "@frontity/types": "^1.9.0",
+    "@frontity/wp-source": "^1.9.1",
+    "frontity": "^1.12.0",
+    "theme-demo-antd": "./packages/theme-demo-antd",
+    "typescript": "^4.3.5"
+  }
+}
