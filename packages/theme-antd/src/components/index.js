@@ -16,6 +16,7 @@ const Theme = ({ state }) => {
     );
     setDate(value);
   };
+  // console.log(state.source);
 
   return (
     <>
@@ -40,12 +41,12 @@ const Theme = ({ state }) => {
         <p>
           Site Title: <em>{state.frontity.title}</em>
         </p>
-        <p>
-          Some Post Link: <em>{state.source.post["26"].link}</em>
+        {/* <p>
+          Some Post Link: <em>{state.source.post[0].link}</em>
         </p>
         <p>
-          Some Post Title: <em>{state.source.post["26"].title.rendered}</em>
-        </p>
+          Some Post Title: <em>{state.source.post[0].title.rendered}</em>
+        </p> */}
 
         <h2>AntD DatePicker Component</h2>
         <DatePicker onChange={handleChange} />

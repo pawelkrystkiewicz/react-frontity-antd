@@ -1,7 +1,7 @@
 import Theme from "./components";
 
-const marsTheme = {
-  name: "theme-demo-antd",
+const themeAntD = {
+  name: "theme-antd",
   roots: {
     /**
      *  In Frontity, any package can add React components to the site.
@@ -17,4 +17,4 @@ const marsTheme = {
   }
 };
 
-export default marsTheme;
+export default themeAntD;

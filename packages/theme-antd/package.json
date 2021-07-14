@@ -1,6 +1,6 @@
 {
-  "name": "theme-demo-antd",
-  "version": "1.0.0",
+  "name": "theme-antd",
+  "version": "0.1.0",
   "description": "Frontity package created using the Frontity CLI.",
   "keywords": [
     "frontity",
@@ -9,7 +9,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "frontity": "^1.12.0",
-    "antd": "^4.7.2",
-    "@emotion/core": "latest"
+    "antd": "^4.7.2"
   }
 }

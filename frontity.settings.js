@@ -1,21 +1,23 @@
+const url = "https://test.frontity.org"
+
 const settings = {
-  name: "demo-frontity-antd",
+  name: "frontity-antd",
   state: {
     frontity: {
-      url: "https://test.frontity.org",
+      url,
       title: "Test Frontity Blog",
       description: "WordPress installation for Frontity development"
     }
   },
   packages: [
     {
-      name: "theme-demo-antd"
+      name: "theme-antd"
     },
     {
       name: "@frontity/wp-source",
       state: {
         source: {
-          api: "https://test.frontity.org/wp-json"
+          api: `${url}/wp-json`
         }
       }
     },
