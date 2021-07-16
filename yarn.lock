@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aamodtgroup/frontity-contact-form-7@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@aamodtgroup/frontity-contact-form-7/-/frontity-contact-form-7-0.2.7.tgz#ca0ca58edc09c0fbcb2fc6fa6331534336dad1ce"
+  integrity sha512-3CLX1yvUHvLlhn7icY7nuuvyr8rqr4xFMEbeWOIJgPCx0riaAbrKYCWyztOvOT5EBBHnyj4htbNXxZYUzFn32w==
+
 "@ant-design/colors@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@ant-design/colors/-/colors-6.0.0.tgz#9b9366257cffcc47db42b9d0203bb592c13c0298"
@@ -1105,7 +1110,7 @@
     "@frontity/react-easy-state" "^7.0.0"
     "@frontity/types" "^1.8.0"
 
-"@frontity/core@^1.9.0":
+"@frontity/core@^1.14.3":
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/@frontity/core/-/core-1.14.3.tgz#870ee61cc17f54bbd232b069e7644e0de94c8308"
   integrity sha512-fE6wBFqyfxGlqBfe0drvIgpcw9EzMy0GpPUzKcIeNnGyQsuCs+1LZMw9ULokj8Mzn3M0FOEicMmGK0djB25hKA==
@@ -1184,7 +1189,7 @@
     frontity "^1.15.0"
     react-intersection-observer "^8.26.2"
 
-"@frontity/html2react@^1.4.0":
+"@frontity/html2react@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@frontity/html2react/-/html2react-1.7.0.tgz#83107382da66717de29da2222f1bb49c56a59a19"
   integrity sha512-OGGcF2tnVBLlMDyHxB9DA0a613rtKOlUT8JpA4g7ESeHxB4N28iX/E/YkYms2qBoD+X1TdXgXHJn7AJttSEpQg==
@@ -1244,7 +1249,7 @@
     "@types/webpack" "^4.41.25"
     ts-essentials "^6.0.0"
 
-"@frontity/wp-source@^1.11.4", "@frontity/wp-source@^1.9.1":
+"@frontity/wp-source@^1.11.4", "@frontity/wp-source@^1.11.5":
   version "1.11.5"
   resolved "https://registry.yarnpkg.com/@frontity/wp-source/-/wp-source-1.11.5.tgz#50bc5db6cddb097c222ed2c235b613922094230e"
   integrity sha512-ptbDpvC4JrrBfRSu9KcsaSu7Ix++Fpf399JMVWnjc6owBLC51Yo90cX2mDNO/tPsI7GUFH/W0vODW6vPhY7p4w==
@@ -3240,7 +3245,12 @@ from2@^2.1.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
 
-frontity@^1.12.0, frontity@^1.14.1, frontity@^1.14.2, frontity@^1.14.3, frontity@^1.15.0, frontity@^1.16.0, frontity@^1.16.1:
+frontity-contact-form-7@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/frontity-contact-form-7/-/frontity-contact-form-7-0.1.7.tgz#1cd7f804648967a5cee3bef915716eb96792d284"
+  integrity sha512-hlRUSdsgrZGauovljh8nW7t5QwzvzJrhcqQjzbRFbd5IO3bdQ34fNGmlja0YgPR18XNbEm2Jz1aQqSpRLrVqNg==
+
+frontity@^1.14.1, frontity@^1.14.2, frontity@^1.14.3, frontity@^1.15.0, frontity@^1.16.0, frontity@^1.16.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/frontity/-/frontity-1.16.1.tgz#d59f6dcbefcf85c85f36427b90c2a347d454251f"
   integrity sha512-A259zDDWlGvae5vXGVFJQ6fOtbZvEzpMOn8q/D+arY+7/vnv4jv+8bbG4Ke0jP6nTEDRojSii85jAkjSvrixbw==
@@ -5983,7 +5993,7 @@ theme-antd@./packages/theme-antd:
   version "0.1.0"
   dependencies:
     antd "^4.7.2"
-    frontity "^1.12.0"
+    frontity "^1.16.1"
 
 through2@^2.0.0:
   version "2.0.5"

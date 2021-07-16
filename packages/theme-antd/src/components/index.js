@@ -1,23 +1,21 @@
-import React, { useState } from "react";
-import { Global, css, connect, styled, Head } from "frontity";
-
-import { DatePicker, message } from "antd";
+import Switch from "@frontity/components/switch";
+import { DatePicker } from "antd";
 import antdGlobalStyles from "antd/dist/antd.css";
-
+import { connect, css, Global, Head, styled } from "frontity";
+import React from "react";
+import Footer from "./footer";
+import Header from "./header";
+import List from "./list";
+import Loading from "./loading";
+import PageError from "./page-error";
+import Post from "./post";
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
 const Theme = ({ state }) => {
-  const [date, setDate] = useState(null);
-  const handleChange = value => {
-    message.info(
-      `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
-    );
-    setDate(value);
-  };
   // console.log(state.source);
-
+  const data = state.source.get(state.router.link);
   return (
     <>
       {/* Add some metatags to the <head> of the HTML. */}
@@ -31,28 +29,27 @@ const Theme = ({ state }) => {
       <Global styles={antdGlobalStyles} />
       <Global styles={globalStyles} />
 
-      <HeaderMainPage>AntD + Frontity</HeaderMainPage>
-
+      <HeadContainer>
+        <Header />
+      </HeadContainer>
       <div style={{ width: 400, margin: "0 auto" }}>
-        <h2>Data from State</h2>
-        <p>
-          Site Description: <em>{state.frontity.description}</em>
-        </p>
-        <p>
-          Site Title: <em>{state.frontity.title}</em>
-        </p>
-        {/* <p>
-          Some Post Link: <em>{state.source.post[0].link}</em>
-        </p>
-        <p>
-          Some Post Title: <em>{state.source.post[0].title.rendered}</em>
-        </p> */}
-
-        <h2>AntD DatePicker Component</h2>
-        <DatePicker onChange={handleChange} />
-        <div style={{ marginTop: 16 }}>
-          Selected Date: {date ? date.format("YYYY-MM-DD") : "None"}
-        </div>
+        <Main>
+          <Switch>
+            <Loading when={data.isFetching} />
+            <DatePicker onChange={console.log} />
+            <List when={data.isArchive} />
+            <Post when={data.isPostType} />
+            <PageError when={data.isError} />
+          </Switch>
+        </Main>
+        {/**
+         * add the Footer component
+         * Here we've wrapped it in a FooterContainer
+         * component for styling purposes
+         */}
+        <FooterContainer>
+          <div>ChunkCreations &copy; 2021</div>
+        </FooterContainer>
       </div>
     </>
   );
@@ -73,18 +70,26 @@ const globalStyles = css`
   }
 `;
 
-const HeaderMainPage = styled.h1`
-  font-size: 40px;
-  font-style: italic;
-  width: 400;
-  text-align: center;
-  padding: 10px;
-  margin-top: 60px;
+const HeadContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1f38c5;
 `;
 
 const Main = styled.div`
   display: flex;
   justify-content: center;
-  background-color: #485461;
-  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  background-image: linear-gradient(
+    180deg,
+    rgba(66, 174, 228, 0.1),
+    rgba(66, 174, 228, 0)
+  );
+`;
+
+const FooterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1f38c5;
 `;
