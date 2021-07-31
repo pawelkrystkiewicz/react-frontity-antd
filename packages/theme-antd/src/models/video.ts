@@ -2,12 +2,13 @@ export type PlayerConfig = OnlyClip | OnlyPlaylist
 
 export type OnlyClip = {
   clip: Clip
+  playlist: null
   __mode: 'clip'
 }
 
 export type OnlyPlaylist = {
+  clip: null
   playlist: PlaylistElement[]
-
   __mode: 'playlist'
 }
 

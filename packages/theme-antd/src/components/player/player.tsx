@@ -6,6 +6,7 @@ import { PlayerConfig } from '../../models/video'
 import { PlayerState, PlayerProgress } from './models'
 import { Slider } from 'antd'
 import { PauseOutlined, CaretRightOutlined } from '@ant-design/icons'
+
 const initialState: PlayerState = {
   playedSeconds: 0,
   played: 0,
@@ -22,7 +23,10 @@ const initialState: PlayerState = {
   seeking: false,
 }
 
-const Player = ({ __mode, ...media }: PlayerConfig) => {
+const Player: React.FunctionComponent<PlayerConfig> = ({
+  __mode,
+  ...media
+}) => {
   const [state, setState] = useState<PlayerState>(initialState)
   const playerRef = useRef(null)
 
@@ -50,7 +54,7 @@ const Player = ({ __mode, ...media }: PlayerConfig) => {
   }
 
   const onSeekerMouseDown = (): void => setState({ ...state, seeking: true })
-  const onToggglePlay = (): void =>
+  const onTogglePlay = (): void =>
     setState({ ...state, playing: !state.playing })
 
   const onVolumeChange = (volume: number): void =>
@@ -65,39 +69,40 @@ const Player = ({ __mode, ...media }: PlayerConfig) => {
   }
 
   //render decision tree based on mode Playlist/Clip
-  switch (true) {
-    case __mode === 'playlist':
-      return <div>Playlist: TODO</div>
 
-    default:
-    case __mode === 'clip':
-      const { title, url, chapters } = media.clip
-      return (
-        <div>
-          {title && <h2>{title}</h2>}
-          <ReactPlayer
-            {...config}
-            url={url}
-            playing={state.playing}
-            controls={state.controls}
-            playbackRate={state.playbackRate}
-            volume={state.volume}
-            muted={state.muted}
-          />
-          <br />
-          <Controls togglePlay={onToggglePlay} playing={state.playing} />
-          <SeekerBar
-            current={state.current}
-            duration={state.duration}
-            chapters={chapters}
-            onChange={onChange}
-            onAfterChange={onAfterChange}
-            onSeekerMouseDown={onSeekerMouseDown}
-          />
-          <Volume volume={state.volume} setNewVolume={onVolumeChange} />
-          <VideoStats {...state} />
-        </div>
-      )
+  if (__mode === 'playlist') {
+    // const urls  =  media.playlist
+    return <div>Playlist: TODO</div>
+  }
+
+  if (__mode === 'clip' && media.clip) {
+    const { title, url, chapters } = media.clip
+    return (
+      <div>
+        {title && <h2>{title}</h2>}
+        <ReactPlayer
+          {...config}
+          url={url}
+          playing={state.playing}
+          controls={state.controls}
+          playbackRate={state.playbackRate}
+          volume={state.volume}
+          muted={state.muted}
+        />
+        <br />
+        <Controls togglePlay={onTogglePlay} playing={state.playing} />
+        <SeekerBar
+          current={state.current}
+          duration={state.duration}
+          chapters={chapters}
+          onChange={onChange}
+          onAfterChange={onAfterChange}
+          onSeekerMouseDown={onSeekerMouseDown}
+        />
+        <Volume volume={state.volume} setNewVolume={onVolumeChange} />
+        <VideoStats {...state} />
+      </div>
+    )
   }
 }
 
@@ -110,10 +115,7 @@ const Controls = ({ togglePlay, playing }) => (
 const Volume = ({ setNewVolume, volume }) => {
   return (
     <Slider
-      style={{
-        display: 'inline-block',
-        height: 50,
-      }}
+      style={{ display: 'inline-block', height: 50 }}
       vertical
       step={0.01}
       max={1}
