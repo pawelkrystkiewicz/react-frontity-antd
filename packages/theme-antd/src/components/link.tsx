@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "frontity";
+import React from 'react'
+import { connect } from 'frontity'
 
 const Link = ({
   state,
@@ -7,24 +7,24 @@ const Link = ({
   link,
   className,
   children,
-  "aria-current": ariaCurrent
+  'aria-current': ariaCurrent,
 }) => {
   const onClick = event => {
     // Do nothing if it's an external link
-    if (link.startsWith("http")) return;
+    if (link.startsWith('http')) return
 
-    event.preventDefault();
+    event.preventDefault()
     // Set the router to the new url.
-    actions.router.set(link);
+    actions.router.set(link)
 
     // Scroll the page to the top
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
 
     // if the menu modal is open, close it so it doesn't block rendering
     if (state.theme.isMobileMenuOpen) {
-      actions.theme.closeMobileMenu();
+      actions.theme.closeMobileMenu()
     }
-  };
+  }
 
   return (
     <a
@@ -35,7 +35,7 @@ const Link = ({
     >
       {children}
     </a>
-  );
-};
+  )
+}
 
-export default connect(Link);
+export default connect(Link)

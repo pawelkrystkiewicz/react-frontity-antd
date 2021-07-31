@@ -17,10 +17,22 @@
   "scripts": {
     "start": "frontity dev --port=1880",
     "build": "frontity build",
-    "serve": "frontity serve"
+    "serve": "frontity serve",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "test": "jest",
+    "test-all": "yarn lint && yarn type-check && yarn test"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn format"
+    ]
   },
   "dependencies": {
     "@aamodtgroup/frontity-contact-form-7": "^0.2.7",
+    "@ant-design/icons": "^4.6.2",
     "@frontity/core": "^1.14.3",
     "@frontity/html2react": "^1.7.0",
     "@frontity/tiny-router": "^1.2.2",
@@ -29,8 +41,15 @@
     "frontity": "^1.16.1",
     "frontity-contact-form-7": "^0.1.7",
     "react-player": "^2.9.0",
-    "react-use": "^17.2.4",
     "theme-antd": "./packages/theme-antd",
     "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint": "^7.32.0"
   }
 }

@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"],
     "moduleResolution": "node",
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "noEmit": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "jsx": "react",
-    "jsxImportSource": "react",
-    "allowJs": true
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "baseUrl": "."
   },
   "exclude": ["**/node_modules/*", "**/dist/*", "**/build/*", "e2e/e2e.js"],
   "include": ["packages", "projects"]

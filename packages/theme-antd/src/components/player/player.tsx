@@ -1,55 +1,129 @@
-import React, { useState, useRef } from "react";
-import ReactPlayer from "react-player/lazy";
-import ProgressBar from "./progress-bar";
-import { formatDuration } from "./helper";
+import React, { useState, useRef } from 'react'
+import ReactPlayer from 'react-player/lazy'
+import SeekerBar from './seeker-bar'
+import { formatDuration, toInt } from './helper'
+import { PlayerConfig } from '../../models/video'
+import { PlayerState, PlayerProgress } from './models'
+import { Slider } from 'antd'
+import { PauseOutlined, CaretRightOutlined } from '@ant-design/icons'
+const initialState: PlayerState = {
+  playedSeconds: 0,
+  played: 0,
+  loadedSeconds: 0,
+  loaded: 0,
+  current: 0,
+  duration: 0,
+  playing: true,
+  controls: true,
+  muted: false,
+  playbackRate: 1,
+  volume: 1,
+  loop: false,
+  seeking: false,
+}
 
-const toInt = n => Math.trunc(n);
+const Player = ({ __mode, ...media }: PlayerConfig) => {
+  const [state, setState] = useState<PlayerState>(initialState)
+  const playerRef = useRef(null)
 
-const Player = ({ playlist, clip }) => {
-  const { title, url, chapters } = clip;
-  const [progress, setProgress] = useState({
-    playedSeconds: 0,
-    played: 0,
-    loadedSeconds: 0,
-    loaded: 0
-  });
-  const [duration, setDuration] = useState(0);
+  // handlers
+  const onProgress = (progress: PlayerProgress): void => {
+    const payload = progress
 
-  const playerRef = useRef(null);
+    if (!state.seeking) {
+      payload.current = toInt(progress.playedSeconds)
+    }
 
-  const onProgress = e =>
-    setProgress({ ...e, current: toInt(e.playedSeconds) });
-  const onDuration = e => setDuration(e);
-  const onChange = value => {};
-  const onAfterChange = value => {
-    playerRef.current.seekTo(value)
-  };
+    setState({ ...state, ...progress })
+  }
+
+  const onDuration = (duration: number): void =>
+    setState({ ...state, duration })
+
+  const onChange = (seconds: number): void => {
+    setState({ ...state, current: toInt(seconds) })
+  }
+
+  const onAfterChange = (seconds: number): void => {
+    setState({ ...state, seeking: false })
+    playerRef.current.seekTo(seconds)
+  }
+
+  const onSeekerMouseDown = (): void => setState({ ...state, seeking: true })
+  const onToggglePlay = (): void =>
+    setState({ ...state, playing: !state.playing })
+
+  const onVolumeChange = (volume: number): void =>
+    setState({ ...state, volume })
+
+  //player non mutable config
   const config = {
     ref: playerRef,
-    controls: true,
-    playbackRate: 1,
     fallback: <span>Loading...</span>,
     onProgress,
-    onDuration
-  };
+    onDuration,
+  }
 
+  //render decision tree based on mode Playlist/Clip
+  switch (true) {
+    case __mode === 'playlist':
+      return <div>Playlist: TODO</div>
+
+    default:
+    case __mode === 'clip':
+      const { title, url, chapters } = media.clip
+      return (
+        <div>
+          {title && <h2>{title}</h2>}
+          <ReactPlayer
+            {...config}
+            url={url}
+            playing={state.playing}
+            controls={state.controls}
+            playbackRate={state.playbackRate}
+            volume={state.volume}
+            muted={state.muted}
+          />
+          <br />
+          <Controls togglePlay={onToggglePlay} playing={state.playing} />
+          <SeekerBar
+            current={state.current}
+            duration={state.duration}
+            chapters={chapters}
+            onChange={onChange}
+            onAfterChange={onAfterChange}
+            onSeekerMouseDown={onSeekerMouseDown}
+          />
+          <Volume volume={state.volume} setNewVolume={onVolumeChange} />
+          <VideoStats {...state} />
+        </div>
+      )
+  }
+}
+
+const Controls = ({ togglePlay, playing }) => (
+  <div onClick={togglePlay}>
+    {playing ? <PauseOutlined /> : <CaretRightOutlined />}
+  </div>
+)
+
+const Volume = ({ setNewVolume, volume }) => {
   return (
-    <div>
-      {title && <span>{title}</span>}
-      <br />
-      <ReactPlayer {...config} url={url} />
-      <br />
-      <VideoStats {...{ ...progress, duration }} />
-      <ProgressBar
-        current={progress.current}
-        duration={duration}
-        chapters={chapters}
-        onChange={onChange}
-        onAfterChange={onAfterChange}
-      />
-    </div>
-  );
-};
+    <Slider
+      style={{
+        display: 'inline-block',
+        height: 50,
+      }}
+      vertical
+      step={0.01}
+      max={1}
+      value={volume}
+      onChange={setNewVolume}
+      tipFormatter={null}
+      onAfterChange={setNewVolume}
+    />
+  )
+}
 
 const VideoStats = ({ playedSeconds, current, duration }) => {
   return (
@@ -60,7 +134,7 @@ const VideoStats = ({ playedSeconds, current, duration }) => {
       <br />
       <span>{current}%</span>
     </>
-  );
-};
+  )
+}
 
-export default Player;
+export default Player

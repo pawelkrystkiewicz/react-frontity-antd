@@ -3,13 +3,13 @@
  * the contact page content
  */
 
-import React from "react";
-import { connect, styled } from "frontity";
+import React from 'react'
+import { connect, styled } from 'frontity'
 
 const Footer = ({ state, libraries }) => {
-  const data = state.source.get("/contact-form");
-  const contactForm = state.source.page[data.id];
-  const Html2React = libraries.html2react.Component;
+  const data = state.source.get('/contact-form')
+  const contactForm = state.source.page[data.id]
+  const Html2React = libraries.html2react.Component
 
   return (
     <>
@@ -17,10 +17,10 @@ const Footer = ({ state, libraries }) => {
         {contactForm && <Html2React html={contactForm.content.rendered} />}
       </ContactForm>
     </>
-  );
-};
+  )
+}
 
-export default connect(Footer);
+export default connect(Footer)
 
 const ContactForm = styled.div`
   width: 848px;
@@ -32,4 +32,4 @@ const ContactForm = styled.div`
   flex-direction: column;
   justify-content: space-around;
   font-size: 0.8em;
-`;
+`

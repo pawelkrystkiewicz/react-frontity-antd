@@ -1,14 +1,14 @@
-import { Package, Action, MergePackages, Frontity } from "frontity/types";
-import { AutoPrefetch } from "@frontity/components/link/types";
-import Html2React from "@frontity/html2react/types";
-import Router from "@frontity/router/types";
-import Source from "@frontity/source/types";
+import { Package, Action, MergePackages, Frontity } from 'frontity/types'
+import { AutoPrefetch } from '@frontity/components/link/types'
+import Html2React from '@frontity/html2react/types'
+import Router from '@frontity/router/types'
+import Source from '@frontity/source/types'
 
 /**
  * A Frontity starter theme designed to learn Frontity.
  */
 interface ThemePackage extends Package {
-  name: string;
+  name: string
   /**
    * Root components exposed by this package.
    */
@@ -17,8 +17,8 @@ interface ThemePackage extends Package {
      * In Frontity, any package can add React components to the site.
      * We use roots for that, scoped to the `theme` namespace.
      */
-    theme: React.ElementType;
-  };
+    theme: React.ElementType
+  }
 
   /**
    * The state exposed by this package.
@@ -31,18 +31,18 @@ interface ThemePackage extends Package {
       /**
        * The auto prefetch setting. Defined in {@link AutoPrefetch}.
        */
-      autoPrefetch: AutoPrefetch;
+      autoPrefetch: AutoPrefetch
 
       /**
        * The menu of the theme. Expresed as an array of arrays that contain the
        * label in the first item and the link in the second.
        */
-      menu: [string, string][];
+      menu: [string, string][]
 
       /**
        * Indicates if the mobile menu is opened or closed.
        */
-      isMobileMenuOpen: boolean;
+      isMobileMenuOpen: boolean
 
       /**
        * The settings of the featured images.
@@ -52,15 +52,15 @@ interface ThemePackage extends Package {
          * Indicates if the feature images should be shown in the archives or
          * not.
          */
-        showOnList: boolean;
+        showOnList: boolean
 
         /**
          * Indicates if the feature images should be shown in the posts or not.
          */
-        showOnPost: boolean;
-      };
-    };
-  };
+        showOnPost: boolean
+      }
+    }
+  }
 
   /**
    * The actions exposed by this package.
@@ -73,23 +73,23 @@ interface ThemePackage extends Package {
       /**
        * Toggles the mobile menu between opened and closed states.
        */
-      toggleMobileMenu: Action<Packages>;
+      toggleMobileMenu: Action<Packages>
 
       /**
        * Closes the mobile menu, not matter the previous state.
        */
-      closeMobileMenu: Action<Packages>;
-      beforeSSR: Action<Packages>;
-    };
-  };
+      closeMobileMenu: Action<Packages>
+      beforeSSR: Action<Packages>
+    }
+  }
   libraries: {
     html2react: {
-      processors: any[];
-    };
-  };
+      processors: any[]
+    }
+  }
 }
 
-export default ThemePackage;
+export default ThemePackage
 
 /**
  * Packages required by `MarsThemeTypeScript`.
@@ -100,4 +100,4 @@ export type Packages = MergePackages<
   Source,
   Html2React,
   ThemePackage
->;
+>
